@@ -2,7 +2,7 @@ services:
   - type: web
     name: hostelcare-backend
     env: java
-    buildCommand: "./gradlew clean build -x test"
+    buildCommand: "chmod +x gradlew && ./gradlew clean build -x test"
     startCommand: "java -jar build/libs/hostelcare-1.0.0.jar"
     envVars:
       - key: DATABASE_URL
