@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: hostelcare-backend
+    env: java
+    buildCommand: "./gradlew clean build -x test"
+    startCommand: "java -jar build/libs/hostelcare-1.0.0.jar"
+    envVars:
+      - key: DATABASE_URL
+        value: jdbc:postgresql://ep-cool-credit-a4dv2s5m.us-east-1.aws.neon.tech/neondb?sslmode=require
+      - key: DATABASE_USERNAME
+        value: neondb_owner
+      - key: DATABASE_PASSWORD
+        value: npg_ot5SGzrE8wHv
+      - key: JWT_SECRET
+        value: hostelcare_super_secret_key_change_in_production_32chars
+
+  - type: web
+    name: hostelcare-frontend
+    env: static
+    rootDir: frontend
+    buildCommand: "npm install && npm run build"
+    staticPublishPath: dist
+    envVars:
+      - key: VITE_API_URL
+        value: https://hostelcare-backend.onrender.com/api
